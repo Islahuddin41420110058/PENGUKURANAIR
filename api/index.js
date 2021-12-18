@@ -42,7 +42,7 @@ bot.on('message', (msg) => {
         ).then((dres1)=>{
             console.log(dres1);
             
-            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(hasil1[0]), parseFloat(dres1[1])]).then((dres2)=>{
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(dres1[0]), parseFloat(dres1[1])]).then((dres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
                         `nilai suhu yang diprediksi adalah ${dres1[0]}`
