@@ -39,21 +39,21 @@ bot.on('message', (msg) => {
                 parseFloat(s[0]), // string to float
                 parseFloat(s[1])
             ]
-        ).then((hasil1)=>{
-            console.log(hasil1);
+        ).then((dres1)=>{
+            console.log(dres1);
             
-            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(hasil1[0]), parseFloat(hasil1[1])]).then((hasil2)=>{
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(hasil1[0]), parseFloat(dres1[1])]).then((dres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai suhu yang diprediksi adalah ${hasil1[0]}`
+                        `nilai suhu yang diprediksi adalah ${dres1[0]}`
                 );
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai keadaanair yang diprediksi adalah ${hasil1[1]}`
+                        `nilai keadaanair yang diprediksi adalah ${dres1[1]}`
                 ); 
                 bot.sendMessage(
                         msg.chat.id,
-                        `Klasifikasi ${hasil2}`
+                        `Klasifikasi ${dres2}`
                 );
                 state = 0;
             })
@@ -73,8 +73,8 @@ r.get('/predict/:N/:B', function(req, res, next) {
             parseFloat(req.params.N), // string to float
             parseFloat(req.params.B)
         ]
-    ).then((hasil)=>{
-        res.json(hasil);
+    ).then((dres)=>{
+        res.json(dres);
     })
 });
 
@@ -90,10 +90,10 @@ r.get('/classify/:N/:B', function(req, res, next) {
             [
                 parseFloat(req.params.N), // string to float
                 parseFloat(req.params.B),
-                parseFloat(hasil[0]),
-                parseFloat(hasil[1])
+                parseFloat(dres[0]),
+                parseFloat(dres[1])
             ]
-        ).then((hasil_)=>{
+        ).then((dres_)=>{
             let status = "MIST MAKER ON AIR TANGKI DIISI";
             
             if(jres_ == "0|1"){
@@ -115,7 +115,7 @@ r.get('/classify/:N/:B', function(req, res, next) {
                      
             ); // to telegram
             
-            res.json({hasil, hasil_})
+            res.json({dres, dres_})
         })
     })
 });
