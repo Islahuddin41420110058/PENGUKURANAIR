@@ -96,15 +96,15 @@ r.get('/classify/:N/:B', function(req, res, next) {
         ).then((dres_)=>{
             let status = "MIST MAKER ON AIR TANGKI DIISI";
             
-            if(jres_ == "0|1"){
+            if(dres_ == "0|1"){
                 status = "MIST MAKER OFF AIR TANGKI DIISI"
-            }if(jres_ == "0|0"){
+            }if(dres_ == "0|0"){
                 status = "MIST MAKER OFF AIR TANGKI OFF"
-            }if(jres_ == "1|0"){
+            }if(dres_ == "1|0"){
                 status = "MIST MAKER ON AIR TANGKI OFF"
             }
             
-//             jres_.split("|");
+//             dres_.split("|");
             const mistmaker = parseFloat(req.params.N);
             const pengisianair = parseFloat(req.params.B)
            
