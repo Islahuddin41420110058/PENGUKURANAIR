@@ -22,7 +22,7 @@ bot.onText(/\/start/, (msg) => {
     state = 0;
 });
 
-//input S dan K
+//input N dan B
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
@@ -94,23 +94,23 @@ r.get('/classify/:N/:B', function(req, res, next) {
                 parseFloat(jres[1])
             ]
         ).then((jres_)=>{
-            let status = "POMPA OFF KIPAS ON";
+            let status = "MIST MAKER ON AIR TANGKI DIISI";
             
-            if(jres_ == "1|1"){
-                status = "POMPA ON KIPAS ON"
-            }if(jres_ == "1|0"){
-                status = "POMPA ON KIPAS OFF"
+            if(jres_ == "0|1"){
+                status = "MIST MAKER OFF AIR TANGKI DIISI"
             }if(jres_ == "0|0"){
-                status = "POMPA OFF KIPAS OFF"
+                status = "MIST MAKER OFF AIR TANGKI OFF"
+            }if(jres_ == "1|0"){
+                status = "MIST MAKER ON AIR TANGKI OFF"
             }
             
 //             jres_.split("|");
-            const suhu = parseFloat(req.params.N);
-            const kelembaban = parseFloat(req.params.B)
+            const mistmaker = parseFloat(req.params.N);
+            const pengisianair = parseFloat(req.params.B)
            
             bot.sendMessage(
                     2128268907, //msg.id
-                    `SUHU:: ${suhu} KELEMBABAN ${kelembaban} KONDISI:: ${status}`
+                    `SUHU:: ${mistmaker} KELEMBABAN ${pengisianair} KONDISI:: ${status}`
                      
                      
             ); // to telegram
