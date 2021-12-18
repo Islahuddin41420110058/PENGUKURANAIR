@@ -39,7 +39,7 @@ bot.on('message', (msg) => {
                 parseFloat(s[0]), // string to float
                 parseFloat(s[1])
             ]
-        ).then((jres1)=>{
+        ).then((hasil1)=>{
             console.log(hasil1);
             
             cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(hasil1[0]), parseFloat(hasil1[1])]).then((hasil2)=>{
