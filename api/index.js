@@ -85,7 +85,7 @@ r.get('/classify/:N/:B', function(req, res, next) {
             parseFloat(req.params.N), // string to float
             parseFloat(req.params.B)
         ]
-    ).then((hasil)=>{
+    ).then((dres)=>{
         cls_model.classify(
             [
                 parseFloat(req.params.N), // string to float
