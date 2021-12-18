@@ -110,7 +110,7 @@ r.get('/classify/:N/:B', function(req, res, next) {
            
             bot.sendMessage(
                     2128268907, //msg.id
-                    `SUHU:: ${mistmaker} KELEMBABAN ${pengisianair} KONDISI:: ${status}`
+                    `mistmaker:: ${mistmaker} pengisianair ${pengisianair} KONDISI:: ${status}`
                      
                      
             ); // to telegram
