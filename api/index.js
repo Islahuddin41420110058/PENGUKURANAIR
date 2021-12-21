@@ -26,7 +26,7 @@ bot.onText(/\/start/, (msg) => {
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `input nilai suhu|jarak contohnya 25|22`
+        `input nilai suhu|jarak contohnya 25|10`
     );   
     state = 1;
 });
