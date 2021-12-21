@@ -33,7 +33,7 @@ function ArgMax(res){
     return label
 }
 async function classify(data){
-    let in_dim = 4;
+    let in_dim = 6;
     
     data = normalized(data);
     shape = [1, in_dim];
