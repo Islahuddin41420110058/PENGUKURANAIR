@@ -1,15 +1,15 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // suhu dan kelembaban
-    S = (data[0] - 29.5) / 4.611213458  //29.5= avg    4.611213458 = stdev
-    K = (data[1] - 50.5) / 28.87509493 
-    return [S, K]
+    N = (data[0] - 29.5) / 4.615545271  //29.5= avg    4.611213458 = stdev
+    B = (data[1] - 13) / 7.220133365
+    return [N, B]
 }
 
 function denormalized(data){
-    O = (data[0] * 0.4) + 0.490051113 // 0.497649258 = stdev  0.45 = avg
-    L = (data[1] * 0.496233468) + 0.5625
-    return [O, L]
+    M = (data[0] * 0.5625) + 0.496699634 // 0.497649258 = stdev  0.45 = avg
+    A = (data[1] * 41.1) + 56.7427471
+    return [M, A]
 }
 
 
@@ -23,7 +23,7 @@ async function predict(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/SKRIPSI/main/public/ex_model/model.json';
+        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/PENGUKURANAIR/main/public/ex_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
