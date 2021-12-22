@@ -8,7 +8,7 @@ function normalized(data){ // suhu dan kelembaban
 
 function denormalized(data){
     M = (data[0] * 0.5625) + 0.496941867 
-    A = (data[1] * 4.333333333) + 4.197228221
+    A = (data[1] * 1.88888888888889) + 0.738310635087347
     return [M, A]
 }
 
