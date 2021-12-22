@@ -1,10 +1,10 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ 
-    N = (data[0] - 29.5) / 4.618269512
-    B = (data[1] - 9) / 4.90800987
-    M = (data[2] - 0.5625) / 0.496992802
-    A = (data[3] - 1.941176471) / 0.640164945
+    N = (data[0] - 29.5) / 4.617796207
+    B = (data[1] - 9.5) / 5.197158162
+    M = (data[2] - 0.5625) / 0.496941867
+    A = (data[3] - 4.333333333) / 4.197228221
     return [N, B, M, A]
 }
 
