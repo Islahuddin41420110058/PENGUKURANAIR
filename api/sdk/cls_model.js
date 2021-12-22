@@ -21,13 +21,13 @@ function ArgMax(res){
     
     if(argMax(cls_data) == 1){
         label = "1|1" //MIST MAKER ON AIR TANGKI ON
-    }if(argMax(cls_data) == 2){
-        label = "0|2" //MIST MAKER OFF AIR TANGKI PROSES 
-    }if(argMax(cls_data) == 3){
-        label = "1|2" //MIST MAKER ON AIR TANGKI PROSES
     }if(argMax(cls_data) == 4){
-        label = "0|3" //MIST MAKER OFF AIR TANGKI OFF
+        label = "0|2" //MIST MAKER OFF AIR TANGKI PROSES 
     }if(argMax(cls_data) == 5){
+        label = "1|2" //MIST MAKER ON AIR TANGKI PROSES
+    }if(argMax(cls_data) == 2){
+        label = "0|3" //MIST MAKER OFF AIR TANGKI OFF
+    }if(argMax(cls_data) == 3){
         label = "1|3" //MIST MAKER ON AIR TANGKI OFF
     }
     return label
