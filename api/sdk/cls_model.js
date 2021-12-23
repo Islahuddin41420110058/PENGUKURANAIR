@@ -6,7 +6,7 @@ function normalized(data){ // i & r
     A = (data[2] - 0.7222222222) / 0.448682849
     M = (data[3] - 0.5625) / 0.496941867
     
-    return [N, B, M, A]
+    return [N, B, A, M]
 }
 
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]). reduce(compareFn)[1]
