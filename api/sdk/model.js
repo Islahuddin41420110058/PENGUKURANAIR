@@ -7,9 +7,10 @@ function normalized(data){ // suhu dan kelembaban
 }
 
 function denormalized(data){
-    M = (data[0] * 0.5625) + 0.496941867 // 0.497649258 = stdev  0.45 = avg
-    A = (data[1] * 0.7222222222) + 0.448682849
-    return [M, A]
+    A = (data[0] * 0.7222222222) + 0.448682849
+    M = (data[1] * 0.5625) + 0.496941867 // 0.497649258 = stdev  0.45 = avg
+   
+    return [A, M]
 }
 
 
