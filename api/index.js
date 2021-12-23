@@ -97,7 +97,7 @@ r.get('/classify/:N/:B', function(req, res, next) {
             let status = "MISTMAKER ON KRAN ON";
             
             if(jres_ == "0|0"){
-                status = "MISTMAKER OFF KRAN OFF
+                status = "MISTMAKER OFF KRAN OFF"
             }if(jres_ == "0|1"){
                 status = "MISTMAKER OFF KRAN ON"
             }if(jres_ == "1|0"){
