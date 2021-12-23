@@ -3,8 +3,9 @@ const tf = require('@tensorflow/tfjs-node');
 function normalized(data){ // i & r
     N = (data[0] - 29.5) / 4.617796207
     B = (data[1] - 9.5) / 5.197158162
-    M = (data[2] - 0.5625) / 0.496941867
-    A = (data[3] - 0.7222222222) / 0.448682849
+    A = (data[2] - 0.7222222222) / 0.448682849
+    M = (data[3] - 0.5625) / 0.496941867
+    
     return [N, B, M, A]
 }
 
@@ -12,19 +13,19 @@ const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]). red
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min ))
 
 function ArgMax(res){
-    label = "1|1" //MISTMAKER ON KRAN ON
+    label = "0|0" //KRAN OFF MISTMAKER OFF
     cls_data = []
     for(i=0; i<res.length; i++){
         cls_data[i] = res[i]
     }
     console.log(cls_data, argMax(cls_data));
     
-    if(argMax(cls_data) == 2){
-        label = "0|0" // MISTMAKER OFF KRAN OFF
-    }if(argMax(cls_data) == 0){
-        label = "0|1" //MISTMAKER OFF KRAN ON
+    if(argMax(cls_data) == 1){
+        label = "0|1" // KRAN OFF MISTMAKER ON
+    }if(argMax(cls_data) == 2){
+        label = "1|0" // KRAN ON MISTMAKER OFF
     }if(argMax(cls_data) == 3){
-        label = "1|0" //MISTMAKER ON KRAN OFF
+        label = "1|1" //KRAN ON MISTMAKER ON
     }
     return label
 }
