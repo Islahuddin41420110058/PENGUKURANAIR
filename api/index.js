@@ -7,7 +7,7 @@ const cls_model = require('./sdk/cls_model.js');
 
 // Bot Setting
 const TelegramBot = require('node-telegram-bot-api');
-const token = '5091398105:AAHnFFJkaim8hYlIF9S_FlG0OWfwA702A-0'
+const token = '5057431556:AAGnOFgp9MlogJhT3sjbMafwdIAdpPX2L8M'
 const bot = new TelegramBot(token, {polling: true});
 
 state = 0;
@@ -22,11 +22,11 @@ bot.onText(/\/start/, (msg) => {
     state = 0;
 });
 
-//input S dan K
+//input N dan B
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `input nilai S|K contohnya 30|50`
+        `input nilai N|B contohnya 30|14`
     );   
     state = 1;
 });
@@ -45,11 +45,11 @@ bot.on('message', (msg) => {
             cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai pompa yang diprediksi adalah ${jres1[0]}`
+                        `nilai mistmaker yang diprediksi adalah ${jres1[0]}`
                 );
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai kipas yang diprediksi adalah ${jres1[1]}`
+                        `nilai keringgianair yang diprediksi adalah ${jres1[1]}`
                 ); 
                 bot.sendMessage(
                         msg.chat.id,
@@ -67,11 +67,11 @@ bot.on('message', (msg) => {
     }
 })
 // routers
-r.get('/predict/:S/:K', function(req, res, next) {    
+r.get('/predict/:N/:B', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.S), // string to float
-            parseFloat(req.params.K)
+            parseFloat(req.params.N), // string to float
+            parseFloat(req.params.B)
         ]
     ).then((jres)=>{
         res.json(jres);
@@ -79,38 +79,38 @@ r.get('/predict/:S/:K', function(req, res, next) {
 });
 
 //routers
-r.get('/classify/:S/:K', function(req, res, next) {    
+r.get('/classify/:N/:B', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.S), // string to float
-            parseFloat(req.params.K)
+            parseFloat(req.params.N), // string to float
+            parseFloat(req.params.B)
         ]
     ).then((jres)=>{
         cls_model.classify(
             [
-                parseFloat(req.params.S), // string to float
-                parseFloat(req.params.K),
+                parseFloat(req.params.N), // string to float
+                parseFloat(req.params.B),
                 parseFloat(jres[0]),
                 parseFloat(jres[1])
             ]
         ).then((jres_)=>{
-            let status = "POMPA OFF KIPAS ON";
+            let status = "MISTMAKER ON KRAN ON";
             
-            if(jres_ == "1|1"){
-                status = "POMPA ON KIPAS ON"
+            if(jres_ == "0|0"){
+                status = "MISTMAKER OFF KRAN OFF"
+            }if(jres_ == "0|1"){
+                status = "MISTMAKER OFF KRAN ON"
             }if(jres_ == "1|0"){
-                status = "POMPA ON KIPAS OFF"
-            }if(jres_ == "0|0"){
-                status = "POMPA OFF KIPAS OFF"
+                status = "MISTMAKER ON KRAN OFF"
             }
             
 //             jres_.split("|");
-            const suhu = parseFloat(req.params.S);
-            const kelembaban = parseFloat(req.params.K)
+            const suhu = parseFloat(req.params.N);
+            const ketinggianair = parseFloat(req.params.B)
            
             bot.sendMessage(
                     2128268907, //msg.id
-                    `SUHU:: ${suhu} KELEMBABAN ${kelembaban} KONDISI:: ${status}`
+                    `SUHU:: ${suhu} AIR ${ketinggianair} KONDISI:: ${status}`
                      
                      
             ); // to telegram
