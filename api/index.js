@@ -98,14 +98,14 @@ r.get('/classify/:N/:B', function(req, res, next) {
             
             if(dres_ == "1|1"){
                 status = "MIST MAKER ON AIR TANGKI ON"
+            }if(dres_ == "0|2"){
+                status = "MIST MAKER OFF AIR TANGKI SENSING"
+            }if(dres_ == "1|2"){
+                status = "MIST MAKER ON AIR TANGKI SENSING"
             }if(dres_ == "0|3"){
                 status = "MIST MAKER OFF AIR TANGKI OFF"
             }if(dres_ == "1|3"){
-                status = "MIST MAKER ON AIR TANGKI OFF"
-            }if(dres_ == "0|2"){
-                status = "MIST MAKER OFF AIR TANGKI PROSES"
-            }if(dres_ == "1|2"){
-                status = "MIST MAKER ON AIR TANGKI PROSES"
+                status = "MIST MAKER ON AIR TANGKI ON"
             
             }
             
