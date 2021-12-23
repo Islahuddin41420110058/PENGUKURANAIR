@@ -94,18 +94,14 @@ r.get('/classify/:N/:B', function(req, res, next) {
                 parseFloat(dres[1])
             ]
         ).then((dres_)=>{
-            let status = "MIST MAKER OFF AIR TANGKI ON";
+            let status = "MIST MAKER OFF AIR SEDANG DIISI";
             
             if(dres_ == "1|1"){
-                status = "MIST MAKER ON AIR TANGKI ON"
-            }if(dres_ == "0|2"){
-                status = "MIST MAKER OFF AIR TANGKI SENSING"
-            }if(dres_ == "1|2"){
-                status = "MIST MAKER ON AIR TANGKI SENSING"
-            }if(dres_ == "0|3"){
-                status = "MIST MAKER OFF AIR TANGKI OFF"
-            }if(dres_ == "1|3"){
-                status = "MIST MAKER ON AIR TANGKI ON"
+                status = "MIST MAKER ON AIR SEDANG DIISI"
+            }if(dres_ == "0|0"){
+                status = "MIST MAKER OFF AIR OFF "
+            }if(dres_ == "1|0"){
+                status = "MIST MAKER ON AIR OFF"
             
             }
             
