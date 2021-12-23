@@ -3,8 +3,8 @@ const tf = require('@tensorflow/tfjs-node');
 function normalized(data){ 
     N = (data[0] - 29.5) / 4.617796207
     B = (data[1] - 9.5) / 5.197158162
-    M = (data[2] - 0.5625) / 0.496941867
-    A = (data[3] - 1.88888888888889) / 0.738310635087347
+    M = (data[2] - 0.5625) / 0.496941867336809
+    A = (data[3] - 0.722222222222222) / 0.448682848877996
     return [N, B, M, A]
 }
 
@@ -12,7 +12,7 @@ const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]). red
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min ))
 
 function ArgMax(res){
-    label = "0|1" //MIST MAKER OFF AIR TANGKI ON
+    label = "0|1" //MIST MAKER OFF AIR SEDANG DIISI
     cls_data = []
     for(i=0; i<res.length; i++){
         cls_data[i] = res[i]
@@ -20,15 +20,11 @@ function ArgMax(res){
     console.log(cls_data, argMax(cls_data));
     
     if(argMax(cls_data) == 1){
-        label = "1|1" //MIST MAKER ON AIR TANGKI ON
+        label = "1|1" //MIST MAKER ON AIR SEDANG DIISI
     }if(argMax(cls_data) == 2){
-        label = "0|2" //MIST MAKER OFF AIR TANGKI SENSING
+        label = "0|0" //MIST MAKER OFF AIR OFF
     }if(argMax(cls_data) == 3){
-        label = "1|2" //MIST MAKER ON AIR TANGKI SENSING
-    }if(argMax(cls_data) == 4){
-        label = "0|3" //MIST MAKER OFF AIR TANGKI OFF
-    }if(argMax(cls_data) == 5){
-        label = "1|3" //MIST MAKER ON AIR TANGKI OFF
+        label = "1|0" //MIST MAKER ON AIR OFF
     
     }
     return label
