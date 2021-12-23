@@ -1,18 +1,18 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    S = (data[0] - 29.5) / 4.611213458
-    K = (data[1] - 50.5) / 28.87509493
-    O = (data[2] - 0.4) / 0.490051113
-    L = (data[3] - 0.5625) / 0.496233468
-    return [S, K, O, L]
+    N = (data[0] - 29.5) / 4.617796207
+    B = (data[1] - 9.5) / 5.197158162
+    M = (data[2] - 0.5625) / 0.496941867
+    A = (data[3] - 0.7222222222) / 0.448682849
+    return [N, B, M, A]
 }
 
 const argFact = (compareFn) => (array) => array.map((el, idx) => [el, idx]). reduce(compareFn)[1]
 const argMax = argFact((min, el) => (el[0] > min[0] ? el : min ))
 
 function ArgMax(res){
-    label = "0|1" //POMPA OFF KIPAS ON
+    label = "1|1" //MISTMAKER ON KRAN ON
     cls_data = []
     for(i=0; i<res.length; i++){
         cls_data[i] = res[i]
@@ -20,11 +20,11 @@ function ArgMax(res){
     console.log(cls_data, argMax(cls_data));
     
     if(argMax(cls_data) == 2){
-        label = "1|0" //POMPA ON KIPAS OFF 
+        label = "0|0" // MISTMAKER OFF KRAN OFF
     }if(argMax(cls_data) == 0){
-        label = "0|0" //POMPA OFF KIPAS OFF 
+        label = "0|1" //MISTMAKER OFF KRAN ON
     }if(argMax(cls_data) == 3){
-        label = "1|1" //POMPA ON KIPAS ON
+        label = "1|0" //MISTMAKER ON KRAN OFF
     }
     return label
 }
@@ -38,7 +38,7 @@ async function classify(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/SKRIPSI/main/public/cls_model/model.json';
+        const path = 'https://raw.githubusercontent.com/Islahuddin41420110058/PENGUKURANAIR/main/public/cls_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
