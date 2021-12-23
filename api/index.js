@@ -45,11 +45,11 @@ bot.on('message', (msg) => {
             cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai mistmaker yang diprediksi adalah ${jres1[0]}`
+                        `nilai ketinggianair yang diprediksi adalah ${jres1[0]}`
                 );
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai keringgianair yang diprediksi adalah ${jres1[1]}`
+                        `nilai mistmaker yang diprediksi adalah ${jres1[1]}`
                 ); 
                 bot.sendMessage(
                         msg.chat.id,
@@ -94,14 +94,14 @@ r.get('/classify/:N/:B', function(req, res, next) {
                 parseFloat(jres[1])
             ]
         ).then((jres_)=>{
-            let status = "MISTMAKER ON KRAN ON";
+            let status = "KRAN OFF MISTMAKER OFF";
             
-            if(jres_ == "0|0"){
-                status = "MISTMAKER OFF KRAN OFF"
-            }if(jres_ == "0|1"){
-                status = "MISTMAKER OFF KRAN ON"
+            if(jres_ == "0|1"){
+                status = "KRAN OFF MISTMAKER ON"
             }if(jres_ == "1|0"){
-                status = "MISTMAKER ON KRAN OFF"
+                status = "KRAN ON MISTMAKER OFF"
+            }if(jres_ == "1|1"){
+                status = "KRAN ON MISTMAKER ON"
             }
             
 //             jres_.split("|");
