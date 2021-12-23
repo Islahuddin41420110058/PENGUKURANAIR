@@ -39,21 +39,21 @@ bot.on('message', (msg) => {
                 parseFloat(s[0]), // string to float
                 parseFloat(s[1])
             ]
-        ).then((jres1)=>{
-            console.log(jres1);
+        ).then((hasil1)=>{
+            console.log(hasil1);
             
-            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(jres1[0]), parseFloat(jres1[1])]).then((jres2)=>{
+            cls_model.classify([parseFloat(s[0]), parseFloat(s[1]), parseFloat(hasil1[0]), parseFloat(hasil1[1])]).then((hasil2)=>{
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai ketinggianair yang diprediksi adalah ${jres1[0]}`
+                        `nilai ketinggianair yang diprediksi adalah ${hasil1[0]}`
                 );
                 bot.sendMessage(
                         msg.chat.id,
-                        `nilai mistmaker yang diprediksi adalah ${jres1[1]}`
+                        `nilai mistmaker yang diprediksi adalah ${hasil1[1]}`
                 ); 
                 bot.sendMessage(
                         msg.chat.id,
-                        `Klasifikasi ${jres2}`
+                        `Klasifikasi ${hasil2}`
                 );
                 state = 0;
             })
@@ -73,8 +73,8 @@ r.get('/predict/:N/:B', function(req, res, next) {
             parseFloat(req.params.N), // string to float
             parseFloat(req.params.B)
         ]
-    ).then((jres)=>{
-        res.json(jres);
+    ).then((hasil)=>{
+        res.json(hasil);
     })
 });
 
@@ -85,22 +85,22 @@ r.get('/classify/:N/:B', function(req, res, next) {
             parseFloat(req.params.N), // string to float
             parseFloat(req.params.B)
         ]
-    ).then((jres)=>{
+    ).then((hasil)=>{
         cls_model.classify(
             [
                 parseFloat(req.params.N), // string to float
                 parseFloat(req.params.B),
-                parseFloat(jres[0]),
-                parseFloat(jres[1])
+                parseFloat(hasil[0]),
+                parseFloat(hasil[1])
             ]
-        ).then((jres_)=>{
+        ).then((hasil_)=>{
             let status = "KRAN OFF MISTMAKER OFF";
             
-            if(jres_ == "0|1"){
+            if(hasil_ == "0|1"){
                 status = "KRAN OFF MISTMAKER ON"
-            }if(jres_ == "1|0"){
+            }if(hasil_ == "1|0"){
                 status = "KRAN ON MISTMAKER OFF"
-            }if(jres_ == "1|1"){
+            }if(hasil_ == "1|1"){
                 status = "KRAN ON MISTMAKER ON"
             }
             
@@ -115,7 +115,7 @@ r.get('/classify/:N/:B', function(req, res, next) {
                      
             ); // to telegram
             
-            res.json({jres, jres_})
+            res.json({hasil, hasil_})
         })
     })
 });
